@@ -23,8 +23,12 @@ left_list.sort()
 right_list.sort()
 
 similarity_score = 0
+memo = {}
 
 for l in left_list:
+    # if found in memo just dump
+    if l in memo:
+        similarity_score += memo[l]
     # find that number in the list
     # if found, iterate thru the list until the number changes
     if l in right_list:
@@ -33,8 +37,8 @@ for l in left_list:
         while right_list[index] == l:
             found += 1
             index += 1
-        similarity_score += l * found
-
+        memo[l] = l * found
+        similarity_score += memo[l]
     # if not found, go to the next number
 
 print(similarity_score)
